@@ -1,0 +1,7 @@
+{
+  "run_id": "dev-run-001",
+  "system_design": {
+    "sys_diagram": "1. Authentication -> 2. Profile Service -> 3. Storage",
+    "retry_count": 0
+  }
+}
