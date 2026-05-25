@@ -1,0 +1,62 @@
+{
+  "req_analysis_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "req_tc_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "req_testing_system": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "sys_design_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "sys_tc_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "sys_testing_system": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "dev_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "qwen/qwen3-coder-480b-a35b-instruct"
+  },
+  "dev_tc_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "qwen/qwen3-coder-480b-a35b-instruct"
+  },
+  "dev_testing_system": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "test_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "coverage_tc_agent": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  },
+  "coverage_testing_system": {
+    "base_url": "${NVIDIA_BASE_URL}",
+    "api_key": "${NVIDIA_API_KEY}",
+    "model": "minimaxai/minimax-m2.7"
+  }
+}
