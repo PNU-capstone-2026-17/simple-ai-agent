@@ -32,12 +32,12 @@
   "dev_agent": {
     "base_url": "${NVIDIA_BASE_URL}",
     "api_key": "${NVIDIA_API_KEY}",
-    "model": "qwen/qwen3-coder-480b-a35b-instruct"
+    "model": "minimaxai/minimax-m2.7"
   },
   "dev_tc_agent": {
     "base_url": "${NVIDIA_BASE_URL}",
     "api_key": "${NVIDIA_API_KEY}",
-    "model": "qwen/qwen3-coder-480b-a35b-instruct"
+    "model": "minimaxai/minimax-m2.7"
   },
   "dev_testing_system": {
     "base_url": "${NVIDIA_BASE_URL}",

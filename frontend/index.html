@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Stream Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/frontend/styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape bg-shape-a"></div>
+    <div class="bg-shape bg-shape-b"></div>
+
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">simple-ai-agent</p>
+        <h1>Realtime Graph Run Stream</h1>
+        <p class="subtitle">Start a pipeline run and watch live SSE logs without leaving the browser.</p>
+      </header>
+
+      <section class="panel controls">
+        <div class="field-grid">
+          <label class="field">
+            <span>API Base URL</span>
+            <input id="baseUrl" type="text" value="http://127.0.0.1:8000" />
+          </label>
+          <label class="field field-wide">
+            <span>Functional Requirement</span>
+            <textarea id="functionalReq" rows="3" placeholder="Describe functional requirements"></textarea>
+          </label>
+          <label class="field field-wide">
+            <span>Non-Functional Requirement</span>
+            <textarea id="nonFunctionalReq" rows="3" placeholder="Describe non-functional requirements"></textarea>
+          </label>
+          <label class="field">
+            <span>Run ID (optional)</span>
+            <input id="runId" type="text" placeholder="reuse existing run id" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="startBtn" class="btn btn-primary">Start Stream</button>
+          <button id="stopBtn" class="btn btn-ghost" disabled>Stop</button>
+          <button id="clearBtn" class="btn btn-ghost">Clear Logs</button>
+        </div>
+      </section>
+
+      <section class="panel status-panel">
+        <div class="status-row">
+          <span class="status-label">Connection</span>
+          <span id="connectionBadge" class="badge badge-idle">Idle</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">Latest Run ID</span>
+          <span id="latestRunId" class="mono">-</span>
+        </div>
+      </section>
+
+      <section class="panel logs-panel">
+        <div class="logs-head">
+          <h2>Event Stream</h2>
+          <p id="eventCount" class="mono">0 events</p>
+        </div>
+        <pre id="logs" class="logs" aria-live="polite"></pre>
+      </section>
+    </main>
+
+    <script src="/frontend/app.js" defer></script>
+  </body>
+</html>

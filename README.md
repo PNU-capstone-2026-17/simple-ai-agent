@@ -74,6 +74,18 @@ uvicorn api:app --reload
 추가로 `/runs/{run_id}/checkpoints`에서 checkpoint 이력을 조회하고,
 `/runs/{run_id}/resume`로 특정 checkpoint 또는 노드 기준 재실행을 시작할 수 있습니다.
 
+4) 브라우저 기반 SSE 실행 콘솔
+
+API 서버를 실행한 뒤 브라우저에서 아래 주소로 접속합니다.
+
+```text
+http://127.0.0.1:8000/
+```
+
+- 프론트엔드 소스는 `frontend/` 디렉토리에 분리되어 있습니다.
+- 화면에서 요구사항을 입력하고 `Start Stream`을 누르면 `/runs/stream` SSE 이벤트(`status`, `log`, `done`, `error`)를 실시간으로 확인할 수 있습니다.
+- 완료 시 마지막 `run_id`가 화면에 표시되어 checkpoint/아티팩트 조회 API와 연계할 수 있습니다.
+
 ## 테스트 및 출력
 
 - 샘플 입력은 `tests/sample_states/`에 있습니다.

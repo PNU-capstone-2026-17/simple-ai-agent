@@ -10,6 +10,7 @@ from pydantic import BaseModel, ValidationError
 
 from .config import get_llm_for_agent
 from .llm_types import OpenAIClientProtocol
+from .run_control import RunCancelledError, raise_if_stopped
 from .logging import begin_inline_stream, end_inline_stream, get_inline_logger, get_logger
 
 
@@ -125,9 +126,11 @@ def _stream_chat_with_logging(
 
     Returns the final concatenated content string.
     """
+    raise_if_stopped()
     begin_inline_stream()
     stream_logger.info("[llm:%s] ", agent_id)
     chunks: list[str] = []
+    stream = None
     try:
         try:
             request_kwargs: dict[str, Any] = {
@@ -139,13 +142,18 @@ def _stream_chat_with_logging(
             if response_format is not None:
                 request_kwargs["response_format"] = response_format
 
+            raise_if_stopped()
+
             stream = client.chat.completions.create(**request_kwargs)
             for chunk in stream:
+                raise_if_stopped()
                 delta = _extract_delta(chunk)
                 if not delta:
                     continue
                 chunks.append(delta)
                 stream_logger.info(delta)
+        except RunCancelledError:
+            raise
         except Exception:
             chunks = []
 
@@ -160,8 +168,10 @@ def _stream_chat_with_logging(
                 request_kwargs["response_format"] = response_format
 
             try:
+                raise_if_stopped()
                 response = client.chat.completions.create(**request_kwargs)
             except Exception:
+                raise_if_stopped()
                 response = client.chat.completions.create(model=model, temperature=temperature, messages=messages)
             content = getattr(response.choices[0].message, "content", None)
 
@@ -170,6 +180,9 @@ def _stream_chat_with_logging(
 
         return content.strip()
     finally:
+        close_stream = getattr(stream, "close", None)
+        if callable(close_stream):
+            close_stream()
         end_inline_stream()
 
 

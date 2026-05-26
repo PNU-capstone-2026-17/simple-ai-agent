@@ -21,8 +21,8 @@ def _flush_pending_logs() -> None:
 
     while _PENDING_STDOUT_LOGS:
         handler, text = _PENDING_STDOUT_LOGS.popleft()
-        handler.stream.write(text)
-        handler.flush()
+        sys.stdout.write(text)
+        sys.stdout.flush()
 
 
 def begin_inline_stream() -> None:
@@ -104,9 +104,9 @@ class InlineStreamHandler(logging.StreamHandler):
         try:
             message = self.format(record)
             with _STREAM_LOCK:
-                self.stream.write(message)
+                sys.stdout.write(message)
                 _INLINE_LINE_OPEN = not message.endswith("\n")
-                self.flush()
+                sys.stdout.flush()
         except Exception:
             self.handleError(record)
 
