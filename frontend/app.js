@@ -71,7 +71,8 @@ function defaultRequirements() {
 async function startStream() {
   defaultRequirements();
 
-  const baseUrl = baseUrlInput.value.trim().replace(/\/$/, "");
+  const baseUrlRaw = baseUrlInput.value.trim().replace(/\/$/, "");
+  const baseUrl = baseUrlRaw || window.location.origin;
   const payload = {
     functional_req: functionalReqInput.value.trim(),
     non_functional_req: nonFunctionalReqInput.value.trim(),

@@ -104,3 +104,29 @@ http://127.0.0.1:8000/
 	적절히 구성하거나 모의(Mocking) 클라이언트를 사용하세요.
 - 변경사항을 확인한 뒤 커밋/배포하시길 권장합니다.
 
+## Minikube 배포 메모
+
+Windows PowerShell에서 Minikube Docker 환경을 쓰려면 먼저 Minikube 프로필과 Docker 엔진이 정상 상태여야 합니다.
+
+한 번에 실행하려면 아래 스크립트를 쓰면 됩니다. Docker Desktop이 먼저 실행 중이어야 합니다.
+
+```powershell
+.\scripts\deploy_minikube.ps1
+```
+
+스크립트가 내부에서 `minikube start`, Docker env 연결, 이미지 빌드, Secret 생성, Kubernetes 적용까지 처리합니다.
+
+수동으로 실행하려면:
+
+```powershell
+minikube start
+& minikube -p minikube docker-env --shell powershell | Invoke-Expression
+docker build -t simple-ai-agent:local .
+```
+
+`docker-env`만 단독으로 치면, Minikube 프로필이 아직 없을 때 바로 실패합니다.
+
+- `minikube profile list`에서 `minikube` 프로필이 보여야 합니다.
+- `docker build`가 `//./pipe/dockerDesktopLinuxEngine` 오류를 내면 Docker Desktop이 꺼져 있거나 엔진이 준비되지 않은 상태입니다.
+- 민감한 환경변수는 `.env`를 직접 배포하지 말고 `kubectl create secret generic ... --from-env-file=.env`로 Secret을 만든 뒤 주입하세요.
+

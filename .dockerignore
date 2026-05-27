@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.env
+.git
+data/
+tests/
+*.sqlite3
+outputs/

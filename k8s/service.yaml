@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-ai-agent
+  namespace: simple-ai-agent
+spec:
+  type: NodePort
+  selector:
+    app: simple-ai-agent
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30080

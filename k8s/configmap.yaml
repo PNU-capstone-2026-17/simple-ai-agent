@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simple-ai-agent-config
+  namespace: simple-ai-agent
+data:
+  PORT: "8000"
+  LOG_LEVEL: "INFO"

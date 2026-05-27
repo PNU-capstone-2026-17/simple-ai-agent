@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-ai-agent
+  namespace: simple-ai-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-ai-agent
+  template:
+    metadata:
+      labels:
+        app: simple-ai-agent
+    spec:
+      containers:
+        - name: app
+          image: simple-ai-agent:local
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: simple-ai-agent-config
+            - secretRef:
+                name: simple-ai-agent-secret
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 2
+            periodSeconds: 5
